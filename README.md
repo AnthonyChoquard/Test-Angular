@@ -1,5 +1,14 @@
 # Test-Angular
 
+## Lancer l'application
+
+Pour pouvoir lancer l'application en local:
+- cloner le repo
+- checkout la branche main
+- lancer un npm install dans le dossier Test-Angular/reporting_app
+- lancer un ng serve dans le dossier Test-Angular/reporting_app
+- ouvrir un navigateur et se rendre sur l'url http://localhost:4200/ sauf si une url différente est spécifiée dans la console lors du ng serve
+
 ## Explications des choix technico-fonctionnels
 
 - Utilisation de la librairie Angular Materials pour la plupart des composants utilisés dans le HTML de ce test, et ce afin de profiter des composants offert par l'api notamment pour les snackbar servant aux alertes qui log les résultats des différentes request à la base de données (réussite comme échec) et aux mat form field ainsi qu'à tout les composant d'input (mat-select mat-input et mat-datepicker) pour gérer facilement le form permettant de créer et de mettre à jour les signalements et profiter de toutes les fonctionnalités associées à ces composants
