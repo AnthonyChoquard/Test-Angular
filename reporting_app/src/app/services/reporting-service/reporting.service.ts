@@ -56,8 +56,8 @@ export class ReportingService {
   getReportingById(id: number): Observable<Reporting> {
     const url = `${this.reportingUrl}/${id}`;
     return this.http.get<Reporting>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Reporting>(`getHero id=${id}`))
+      tap(_ => this.log(`fetched reporting id=${id}`)),
+      catchError(this.handleError<Reporting>(`getReporting id=${id}`))
     );
   }
 
@@ -93,13 +93,10 @@ export class ReportingService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error);
   
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
   
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
