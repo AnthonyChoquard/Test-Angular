@@ -1,0 +1,89 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content class="reporting-form-container">
+            <div class="row">
+                <div class="col-4 logo-container d-flex justify-content-center align-items-center">
+                    <img src="./assets/logo.png" class="w-100 h-auto mx-5">
+                </div>
+                <div class="col-8">
+                    <form [formGroup]="reportingForm" class="form">
+                        <span class="my-2">*Please fill the following form to submit a reporting</span>
+                        <div class="row my-1">
+                            <mat-form-field class="col-6 mr-1 form-input">
+                                <mat-label>First name</mat-label>
+                                <input matInput formControlName="firstName">
+                            </mat-form-field>
+                            <mat-form-field class="col-6 form-input">
+                                <mat-label>Last name</mat-label>
+                                <input matInput formControlName="lastName">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row my-1">
+                            <mat-form-field appearance="fill" class="col-6 mr-1 form-input">
+                                <mat-label>Date of birth</mat-label>
+                                <input matInput [readonly]="true" formControlName="birthDate" [matDatepicker]="picker" [min]="minDateLimit" [max]="maxDateLimit">  
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker startView="multi-year" #picker disabled="false"></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="col-6 form-input">
+                                <mat-label>Gender</mat-label>
+                                <mat-select formControlName="gender">
+                                    <mat-option *ngFor="let gender of genderList" [value]="gender">
+                                        {{gender}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row my-1">
+                            <mat-form-field class="col-9 form-input">
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email">
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="row my-1">
+                            <mat-form-field class="col-9 form-input">
+                                <mat-label>Title</mat-label>
+                                <input matInput formControlName="title" maxlength="50">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row my-1">
+                            <mat-form-field class="col-12 form-input">
+                                <mat-label>Observations</mat-label>
+                                <mat-select formControlName="observations" multiple [compareWith]="compareWith">
+                                    <mat-option *ngFor="let observation of observationList"
+                                        [value]="observation">{{observation.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row my-1">
+                            <mat-form-field class="col-12">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="description"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-end">
+                        <button *ngIf="!isUpdatingCase" mat-button class="w-25 send-button" (click)="sendReporting()">
+                            Send
+                            <mat-icon class="icon">
+                                play_arrow
+                            </mat-icon>
+                        </button>
+                        <button *ngIf="isUpdatingCase" mat-button class="w-25 send-button" (click)="saveChange()">
+                            Update
+                            <mat-icon class="icon">
+                                update
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

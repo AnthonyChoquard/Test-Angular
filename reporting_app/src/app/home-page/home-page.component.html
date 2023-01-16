@@ -1,0 +1,50 @@
+<div class="container">
+  <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="refreshList($event)">
+    <mat-tab label="Reporting form">
+      <app-reporting-form class="col-5"></app-reporting-form>
+    </mat-tab>
+    <mat-tab label="Reporting list">
+      <div class="container">
+        <h1>All currently oppened reportings :</h1>
+        <mat-expansion-panel class="col-6" [hideToggle]="false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Filter reportings</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-checkbox *ngFor="let observation of observationList" value="observation" color="primary" (change)="updateFilterList(observation)">{{observation.name}}</mat-checkbox>
+            <div class="d-flex justify-content-end">
+              <button mat-button class="w-25 send-button" (click)="filterReportings()">
+                  Filter
+                  <mat-icon class="icon">
+                    filter_list
+                  </mat-icon>
+              </button>
+            </div>
+        </mat-expansion-panel>
+        <div class="my-2" *ngFor="let reporting of reportingsFiltered">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                {{ reporting.title }} -
+                <span class="mx-2" *ngFor="let observation of reporting.observations">{{observation.name}}</span>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <div>
+                    {{ reporting.author.lastName }}
+                    {{ reporting.author.firstName }} - 
+                    {{ reporting.author.email }}
+                </div>
+                <div>{{ reporting.author.birthDate }} {{ reporting.author.sex }}</div>
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                {{ reporting.description }}
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-button (click)="modifySelectedReporting(reporting.id)">Modify</button>   
+          </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
